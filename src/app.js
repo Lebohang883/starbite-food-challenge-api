@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middlewares/errorMiddleware');
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(morgan('dev', {
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {
