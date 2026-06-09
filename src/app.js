@@ -5,6 +5,7 @@ const logger = require('./utils/logger');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middlewares/errorMiddleware');
+const challengeRoutes = require('./routes/challengeRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(morgan('dev', {
 // Routes
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.use('/challenges', challengeRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {
