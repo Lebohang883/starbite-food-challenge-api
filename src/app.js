@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middlewares/errorMiddleware');
 const challengeRoutes = require('./routes/challengeRoutes');
+const submissionRoutes = require('./routes/submissionRoutes');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(morgan('dev', {
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/challenges', challengeRoutes);
+app.use('/submissions', submissionRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {
