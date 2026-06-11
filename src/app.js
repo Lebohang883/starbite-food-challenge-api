@@ -7,7 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middlewares/errorMiddleware');
 const challengeRoutes = require('./routes/challengeRoutes');
 const submissionRoutes = require('./routes/submissionRoutes');
-
+const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const app = express();
 
 // Body parsing
@@ -25,6 +25,7 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/challenges', challengeRoutes);
 app.use('/submissions', submissionRoutes);
+app.use('/leaderboard', leaderboardRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {
