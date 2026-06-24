@@ -5,9 +5,11 @@ const axios = require('axios');
 //Get meal suggestion from TheMealDB based on challenge title
 const getMealSuggestion = async (title) => {
   try {
+    const baseUrl = process.env.MEALDB_API_URL;
+
     // Try to search for a meal matching the challenge title
     const searchResponse = await axios.get(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(title)}`
+      `${baseUrl}/search.php?s=${encodeURIComponent(title)}`
     );
 
     if (searchResponse.data.meals && searchResponse.data.meals.length > 0) {
@@ -17,7 +19,7 @@ const getMealSuggestion = async (title) => {
     // If no match found, try searching by the first word of the title
     const firstWord = title.split(' ')[0];
     const fallbackSearch = await axios.get(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(firstWord)}`
+      `${baseUrl}/search.php?s=${encodeURIComponent(firstWord)}`
     );
 
     if (fallbackSearch.data.meals && fallbackSearch.data.meals.length > 0) {
@@ -25,7 +27,7 @@ const getMealSuggestion = async (title) => {
     }
 
     // If still no match, fall back to a random meal
-    const randomResponse = await axios.get('https://www.themealdb.com/api/json/v1/1/random.php');
+    const randomResponse = await axios.get(`${baseUrl}/random.php`);
     return randomResponse.data.meals[0].strMeal;
   } catch (error) {
     logger.error(`MealDB API error: ${error.message}`);
